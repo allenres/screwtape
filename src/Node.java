@@ -39,6 +39,14 @@ public class Node {
    */
   public Node(List<Integer> list) {
     // TODO: implement this
+    this.value = list.get(0);
+    Node current = this;
+    for(int i = 1; i < list.size(); i++) {
+      Node newNode = new Node(list.get(i));
+      current.next = newNode;
+      newNode.prev = current;
+      current = newNode;
+    }
   }
 
   /**
