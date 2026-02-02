@@ -38,6 +38,10 @@ public class Node {
    * @throws IllegalArgumentException If the list is null or empty.
    */
   public Node(List<Integer> list) {
+    if (list == null || list.isEmpty()) {
+      throw new IllegalArgumentException("Expected constructor to throw IllegalArgumentException for an empty list.");
+    } 
+
     // TODO: implement this
     this.value = list.get(0);
     Node current = this;
