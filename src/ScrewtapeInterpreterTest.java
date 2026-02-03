@@ -12,7 +12,7 @@ class ScrewtapeInterpreterTest {
   void testNestedBracketMap() {
     // Arrange
     ScrewtapeInterpreter interpreter = new ScrewtapeInterpreter();
-    String program = ">[[+>[+-]<]";
+    String program = ">[+>[+-]<]";
 
     Map<Integer, Integer> expectedMap = new HashMap<>();
     expectedMap.put(9, 1);
