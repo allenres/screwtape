@@ -50,7 +50,7 @@ class NodeTest {
     assertThrows(
         IllegalArgumentException.class,
         () -> new Node(nullList),
-        "Expected constructor to throw IllegalArgumentException for an null list.");
+        "Expected constructor to throw IllegalArgumentException for a null list.");
   }
 
   // TODO: Add at least one more test for list constructor that would be useful

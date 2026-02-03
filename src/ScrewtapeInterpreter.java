@@ -183,22 +183,25 @@ public class ScrewtapeInterpreter {
     // If you get stuck, you can look at hint.md for a hint
     int instructionPointer = 0;
     String outPutString = "";
-    while(instructionPointer < program.length()) {
-      if(program.charAt(instructionPointer) == '+') {
+    Map<Integer, Integer> map = bracketMap(program);
+    while (instructionPointer < program.length()) {
+      if (program.charAt(instructionPointer) == '+') {
         tapePointer.value += 1;
       }
-      if(program.charAt(instructionPointer) == '-') {
+      if (program.charAt(instructionPointer) == '-') {
         tapePointer.value -= 1;
       }
-      if(program.charAt(instructionPointer) == '>') {
+      if (program.charAt(instructionPointer) == '>') {
         if (tapePointer.next != null) {
           tapePointer = tapePointer.next;
         } else {
-          tapePointer.next = new Node(0);
-          tapePointer = tapePointer.next;
+          Node newNode = new Node(0);
+          newNode.prev = tapePointer;
+          tapePointer.next = newNode;
+          tapePointer = newNode;
         }
       }
-      if(program.charAt(instructionPointer) == '<') {
+      if (program.charAt(instructionPointer) == '<') {
         if (tapePointer.prev != null) {
           tapePointer = tapePointer.prev;
           tapeHead = tapePointer;
@@ -209,12 +212,18 @@ public class ScrewtapeInterpreter {
           tapeHead = tapePointer;
         }
       }
-      if(program.charAt(instructionPointer) == '.') {
+      if (program.charAt(instructionPointer) == '.') {
         char c = (char) this.getTapePointerValue();
         outPutString += c;
       }
+      if (program.charAt(instructionPointer) == ']') {
+        if (tapePointer.value != 0) {
+          int matchingBracketIndex = map.get(instructionPointer);
+          instructionPointer = matchingBracketIndex - 1;
+        }
+      }
       instructionPointer++;
-    } 
+    }
     return outPutString;
   }
 }
